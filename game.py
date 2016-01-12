@@ -1,8 +1,5 @@
 class Game(object):
+    score = 0
     
     def roll(self, pins):
-        pass
-    
-    def score(self):
-        return 0
-
+        self.score += pins
