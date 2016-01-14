@@ -12,20 +12,32 @@ class BowlingGameTest(unittest.TestCase):
     
     def test_game_all_gutterballs(self):
         self.setUp()
+        print "test_game_all_gutterballs"
         self.rollMany(20, 0)
         self.assertEqual(0, self.g.score())
         
     def test_game_all_1s(self):
         self.setUp()
+        print "test_game_all_1s"
         self.rollMany(20, 1)
         self.assertEqual(20, self.g.score())
         
     def test_one_spare(self):
         self.setUp()
+        print "test_one_spare"
         self.rollSpare()
         self.g.roll(3)
         self.rollMany(17, 0) #17 gutterballs ouch lol
         self.assertEqual(16, self.g.score())
+        
+    def test_one_strike(self): #step one of test 4 done
+        self.setUp()
+        print "test_one_strike"
+        self.g.roll(10) #strike
+        self.g.roll(3)
+        self.g.roll(4)
+        self.rollMany(16, 0) #16 gutterballs ouch lol
+        self.assertEqual(24, self.g.score())
         
     def rollSpare(self):
         self.g.roll(5)

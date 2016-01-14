@@ -3,7 +3,6 @@ class Game(object):
     currentRoll = 0
     
     def roll(self, pins):
-        #self.score += pins
         self.rolls[self.currentRoll] = pins
         self.currentRoll = self.currentRoll + 1
         
@@ -11,24 +10,30 @@ class Game(object):
         score = 0
         frameIndex = 0
         for frame in xrange(0, 10):
-            if (self.isSpare(frameIndex)):
-                score += 10 + self.rolls[frameIndex+2]
+            if (self.rolls[frameIndex] == 10): #strike
+                score += 10 + self.strikeBonus(frameIndex)
+                frameIndex += 1
+                print "STRIKE!! MOM GET THE CAMERA"
+                print "score is now ",score," after frameIndex ",frameIndex
+                continue
+            elif (self.isSpare(frameIndex)):
+                score += 10 + self.spareBonus(frameIndex)
+                print "SPARE OH BABY"
             else:
-                score += self.rolls[frameIndex] + self.rolls[frameIndex+1]
+                score += self.sumOfBallsInFrame(frameIndex)
             frameIndex += 2
+            print "score is now ",score," after frameIndex ",frameIndex
         return score
+    
+    
+    def sumOfBallsInFrame(self, frameIndex):
+        return self.rolls[frameIndex]+self.rolls[frameIndex+1]
+    
+    def spareBonus(self, frameIndex):
+        return self.rolls[frameIndex+2]
         
+    def strikeBonus(self, frameIndex):
+        return self.rolls[frameIndex+1] + self.rolls[frameIndex+2]
     
     def isSpare(self, frameIndex):
         return self.rolls[frameIndex] + self.rolls[frameIndex+1] == 10
-
-
-'''
-For the last check-in for Test 2, it is worth noting that in python, you cannot have variables and functions with the same name.
-
-In the example, they had both an int and a function that returns an int called score
-In my check-in for Test 2 I did not include the function since the var score is necessary but the function is not
-If you rename the function to something such as getScore it flags it as unnecessary, so I simply left it out
-
-that having been said, the int variable "score" is replaced in a method in the steps taken to complete Test 3 so this becomes a moot point
-'''
