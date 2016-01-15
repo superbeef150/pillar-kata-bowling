@@ -10,7 +10,7 @@ class Game(object):
         score = 0
         frameIndex = 0
         for frame in xrange(0, 10):
-            if (self.rolls[frameIndex] == 10): #strike
+            if (self.isStrike(frameIndex)):
                 score += 10 + self.strikeBonus(frameIndex)
                 frameIndex += 1
                 print "STRIKE!! MOM GET THE CAMERA"
@@ -25,6 +25,9 @@ class Game(object):
             print "score is now ",score," after frameIndex ",frameIndex
         return score
     
+    
+    def isStrike(self, frameIndex):
+        return self.rolls[frameIndex] == 10
     
     def sumOfBallsInFrame(self, frameIndex):
         return self.rolls[frameIndex]+self.rolls[frameIndex+1]

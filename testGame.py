@@ -30,15 +30,19 @@ class BowlingGameTest(unittest.TestCase):
         self.rollMany(17, 0) #17 gutterballs ouch lol
         self.assertEqual(16, self.g.score())
         
-    def test_one_strike(self): #step one of test 4 done
+    def test_one_strike(self):
         self.setUp()
         print "test_one_strike"
-        self.g.roll(10) #strike
+        self.rollStrike()
         self.g.roll(3)
         self.g.roll(4)
         self.rollMany(16, 0) #16 gutterballs ouch lol
         self.assertEqual(24, self.g.score())
         
+    
+    def rollStrike(self):
+        self.g.roll(10)
+    
     def rollSpare(self):
         self.g.roll(5)
         self.g.roll(5)
