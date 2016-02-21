@@ -45,6 +45,30 @@ class BowlingGameTest(unittest.TestCase):
         self.rollMany(12, 10)
         self.assertEqual(300, self.g.score())
         
+    def test_Michael_IRL(self):
+        self.setUp()
+        print "test_Michael_IRL"
+        self.g.roll(0)
+        self.g.roll(6)
+        self.g.roll(0)
+        self.g.roll(1)
+        self.rollStrike()
+        self.g.roll(1)
+        self.g.roll(9)#spare
+        self.g.roll(7)
+        self.g.roll(1)
+        self.g.roll(7)
+        self.g.roll(0)
+        self.g.roll(0)
+        self.g.roll(0)
+        self.g.roll(8)
+        self.g.roll(2)#spare
+        self.g.roll(7)
+        self.g.roll(2)
+        self.g.roll(1)
+        self.g.roll(9)
+        self.g.roll(6)
+        self.assertEqual(101, self.g.score())
     
     def rollStrike(self):
         self.g.roll(10)
